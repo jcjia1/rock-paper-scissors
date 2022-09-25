@@ -3,12 +3,99 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=<device-width>, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
 <body>
     <script>
+        function getComputerChoice() { 
+            let rng = Math.floor(Math.random()*3);
+                if (rng === 0) {
+                    return "rock";
+                }
+                else if (rng === 1) {
+                    return "paper";
+                }
+
+                else if (rng === 2) {
+                    return "scissors";
+                }
+
+                else {
+                    return "getComputerChoice function error!";
+                }
+        }
         
+        function getUserChoice() {
+            let choice = prompt ("Rock, paper or scissors?",);
+            if (choice === null) {
+                return `invalid`
+            }
+            else if (choice === "rock" || "paper" || "scissors") {
+                return choice.toLowerCase()
+            }
+            else {
+                return `invalid`
+            }
+        }
+
+        function playRound (computerSelection, userSelection) {
+            if (computerSelection === "rock") {
+                if (userSelection === "rock") {
+                    return "tie!";
+                }
+                else if (userSelection === "paper") {
+                    return "player wins!";
+                }
+                else if (userSelection === "scissors") {
+                    return "computer wins!";
+                }
+            }
+            else if (computerSelection === "paper") {
+                if (userSelection === "rock") {
+                    return "computer wins!";
+                }
+                else if (userSelection === "paper") {
+                    return "tie!";
+                }
+                else if (userSelection === "scissors") {
+                    return "player wins!";
+                }
+            }
+            if (computerSelection === "scissors") {
+                if (userSelection === "rock") {
+                    return "player wins!";
+                }
+                else if (userSelection === "paper") {
+                    return "computer wins!";
+                }
+                else if (userSelection === "scissors") {
+                    return "tie!";
+                }
+            }
+            if (userSelection === "invalid") {
+                    return "invalid!"
+            }
+        };
+        
+        let playerScore = 0;
+        let computerScore = 0;
+
+        for (let i = 0; i < 5; i ++) {
+            let computerSelection = getComputerChoice();
+            console.log (`Computer chooses ${computerSelection}`);
+            let userSelection = getUserChoice();
+            console.log (`Player chooses ${userSelection}`);
+            console.log (`Result: ${playRound(computerSelection,userSelection)}`)
+            
+            if (playRound(computerSelection,userSelection) === "player wins!") {
+                playerScore += 1;
+            }
+            else if (playRound(computerSelection,userSelection) === "computer wins!") {
+                computerScore += 1;
+            }
+            console.log (`Player: ${playerScore}, Computer: ${computerScore}`);
+        }
     </script>
 </body>
 </html>
